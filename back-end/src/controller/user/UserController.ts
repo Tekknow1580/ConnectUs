@@ -1,16 +1,20 @@
 import { Get, JsonController } from "routing-controllers";
-import { UserRepository } from "src/domain/repository/UserRepository";
 import { Service } from "typedi";
 import { Container, InjectRepository } from "typeorm-typedi-extensions";
+import { UserRepository } from "../../domain/repository/UserRepository";
+import { UserService } from "../../service/UserService";
+import { Dummy } from "../Dummy";
 
 @JsonController("/api/users")
 @Service()
 export class UserController {
 
-    private userRepository: UserRepository;
+    private dummy: Dummy;
+    private userService: UserService;
 
     constructor(){
-        this.userRepository = Container.get(UserRepository);
+        this.dummy = Container.get(Dummy);
+        this.userService = Container.get(UserService);
     }
 
     @Get("")
@@ -21,6 +25,7 @@ export class UserController {
 
     @Get("/world")
     public world() {
-        return this.userRepository.count();
+        this.userService.count();
+        return this.dummy.hello();
     }
 }

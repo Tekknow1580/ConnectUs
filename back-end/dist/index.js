@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
 const DBConfig_1 = __importDefault(require("./configuration/DBConfig"));
 const typeorm_1 = require("typeorm");
 const routing_controllers_1 = require("routing-controllers");

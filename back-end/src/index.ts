@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import datasourceConfig from './configuration/DBConfig';
 import {createConnection, useContainer} from 'typeorm';
 import { createExpressServer } from 'routing-controllers';

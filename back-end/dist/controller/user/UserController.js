@@ -11,18 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const routing_controllers_1 = require("routing-controllers");
-const UserRepository_1 = require("src/domain/repository/UserRepository");
 const typedi_1 = require("typedi");
 const typeorm_typedi_extensions_1 = require("typeorm-typedi-extensions");
+const UserService_1 = require("../../service/UserService");
+const Dummy_1 = require("../Dummy");
 let UserController = class UserController {
     constructor() {
-        this.userRepository = typeorm_typedi_extensions_1.Container.get(UserRepository_1.UserRepository);
+        this.dummy = typeorm_typedi_extensions_1.Container.get(Dummy_1.Dummy);
+        this.userService = typeorm_typedi_extensions_1.Container.get(UserService_1.UserService);
     }
     hello() {
         return "Hello World";
     }
     world() {
-        return this.userRepository.count();
+        this.userService.count();
+        return this.dummy.hello();
     }
 };
 __decorate([

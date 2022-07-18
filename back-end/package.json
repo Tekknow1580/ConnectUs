@@ -28,7 +28,6 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.8.1",
-    "typedi": "^0.10.0",
     "typeorm-typedi-extensions": "^0.4.1",
     "typeorm": "^0.3.7"
   },

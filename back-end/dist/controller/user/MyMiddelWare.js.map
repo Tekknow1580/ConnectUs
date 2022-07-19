@@ -1,1 +1,0 @@
-{"version":3,"file":"MyMiddelWare.js","sourceRoot":"","sources":["../../../src/controller/user/MyMiddelWare.ts"],"names":[],"mappings":";;;AAEA,MAAa,YAAY;IAGvB,GAAG,CAAC,OAAY,EAAE,QAAa,EAAE,IAAwB;QACvD,OAAO,CAAC,GAAG,CAAC,mBAAmB,CAAC,CAAC;QACjC,IAAI,EAAE,CAAC;IACT,CAAC;CACF;AAPD,oCAOC"}

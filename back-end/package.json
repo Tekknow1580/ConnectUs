@@ -29,7 +29,7 @@
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.8.1",
     "typeorm-typedi-extensions": "^0.4.1",
-    "typeorm": "^0.3.7"
+    "typeorm": "^0.2.37"
   },
   "devDependencies": {
     "@types/node": "^18.0.1",

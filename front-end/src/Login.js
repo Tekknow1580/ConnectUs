@@ -24,17 +24,17 @@ export default function Login() {
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
         })).json();
 
-        if (ANS != true && ANS != false) {
-            SetError('Error: ' + ANS);
+        if (ANS.res !== true && ANS.res !== false) {
+            SetError('Error: ' + ANS.res);
             return;
         }
 
-        if (ANS == false) {
+        if (ANS.res === false) {
             SetError("* Invalid User Name Or Password");
             return;
         }
 
-        localStorage.setItem("Token", JSON.stringify(ANS));
+        localStorage.setItem("Token", JSON.stringify(ANS.TK));
         navigator("/main")
     }
 
@@ -45,17 +45,17 @@ export default function Login() {
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
         })).json();
 
-        if (ANS != true && ANS != false) {
-            SetError('Error: ' + ANS);
+        if (ANS.res !== true && ANS.res !== false) {
+            SetError('Error: ' + ANS.res);
             return;
         }
 
-        if (ANS == false) {
+        if (ANS.res === false) {
             SetError("* Invalid User Name Or Password");
             return;
         }
 
-        localStorage.setItem("Token", JSON.stringify(ANS));
+        localStorage.setItem("Token", JSON.stringify(ANS.TK));
         navigator("/main")
     }
 

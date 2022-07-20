@@ -19,7 +19,12 @@ export class AuthController {
     async login(@Body() user: Login) {
         var SavedUser = await this.userservice.FindByUserName(user.UserName);
         if (SavedUser != undefined && await this.passwordService.Validate(user.Password, SavedUser.Password))
-            return this.tokenservice.Gen(SavedUser);
-        return false;
+            return {
+                res: true, TK: {
+                    TK: this.tokenservice.Gen(SavedUser),
+                    User: user.UserName
+                }
+            }
+        return {res: false};
     }
 }

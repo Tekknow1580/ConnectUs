@@ -3,16 +3,19 @@ import { Service } from "typedi";
 import { Container } from "typeorm-typedi-extensions";
 import { Authmiddelware } from "../middelware/Authmiddelware";
 import { Login } from "../models/LoginModel";
+import { TokenService } from "../service/TokenService";
 import { UserService } from "../service/UserService";
 
 @JsonController("/User")
 @Service()
 export class UserController {
 
-    private userService: UserService;
+    private UserSer: UserService;
+    private TKSer: TokenService;
 
-    constructor(){
-        this.userService = Container.get(UserService);
+    constructor() {
+        this.UserSer = Container.get(UserService);
+        this.TKSer = Container.get(TokenService);
     }
 
     @Get("")
@@ -21,24 +24,33 @@ export class UserController {
     }
 
     @Post("/New")
-    public NewUser(@Body() user: Login){
-        return this.userService.save(user);
+    public async NewUser(@Body() user: Login) {
+        var NewUser = await this.UserSer.save(user);
+        if (NewUser == false)
+            return { res: false }
+        return {
+            res: true, TK: {
+                TK: this.TKSer.Gen(NewUser),
+                User: user.UserName
+            }
+        }
     }
 
+    @UseBefore(Authmiddelware)
+    @Get("Delaits/:Name")
+    public GetUser(@Param("Name") Name: string) {
+        return this.UserSer.FindByUserName(Name);
+    }
+
+    @UseBefore(Authmiddelware)
     @Delete("/Del/:ID")
-    public DelUser(@Param("ID")ID:number){
-        return this.userService.DelUser(ID);
+    public DelUser(@Param("ID") ID: number) {
+        return this.UserSer.DelUser(ID);
     }
 
     @UseBefore(Authmiddelware)
     @Get("/AllUsers")
-    public AllUsers(){
-        return this.userService.AllUsers();
-    }
-
-    @Get("/world")
-    public world() {
-        this.userService.count();
-        return this.userService.count();
+    public AllUsers() {
+        return this.UserSer.AllUsers();
     }
 }

@@ -19,7 +19,10 @@ export class UserService {
     async save(user: Login) {
         user.Password = await this.passwordService.Encode(user.Password);
         var NewUser = new User(user.UserName, user.Password);
-        return this.userRepository.save(NewUser);
+        try{
+            this.userRepository.save(NewUser);
+        }catch {return false}
+        return NewUser;
     }
 
     DelUser(ID: number) {

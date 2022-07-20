@@ -1,6 +1,6 @@
-import { UserControllers } from "./user";
-
+import { AuthController } from "./AuthController";
+import { UserController } from "./UserController";
 
 export const Controllers: Function[] = [
-    ...UserControllers
+    UserController, AuthController
 ]

@@ -1,5 +1,5 @@
 import { Body, Get, JsonController, Param, Post } from "routing-controllers";
-import Container, { Token } from "typedi";
+import Container from "typedi";
 import User from "../domain/entities/User";
 import { SortUser } from "../models/UserModel";
 import { PasswordService } from "../service/PasswordService";

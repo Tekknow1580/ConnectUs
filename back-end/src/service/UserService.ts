@@ -2,7 +2,6 @@ import { Service } from "typedi";
 import { Container, InjectRepository } from "typeorm-typedi-extensions";
 import User from "../domain/entities/User";
 import { UserRepository } from "../domain/repository/UserRepository";
-import { Login } from "../models/LoginModel";
 import { PasswordService } from "./PasswordService";
 
 @Service()
@@ -16,16 +15,15 @@ export class UserService {
         return this.userRepository.count();
     }
 
-    async save(user: Login) {
-        user.Password = await this.passwordService.Encode(user.Password);
-        var NewUser = new User(user.UserName, user.Password);
-        try{
+    async save(NewUser: User) {
+        NewUser.Password = await this.passwordService.Encode(NewUser.Password);
+        try {
             this.userRepository.save(NewUser);
-        }catch {return false}
+        } catch { return false }
         return NewUser;
     }
 
-    DelUser(ID: number) {
+    DelUser(ID: string) {
         return this.userRepository.delete(ID);
     }
 
@@ -33,7 +31,7 @@ export class UserService {
         return this.userRepository.find({});
     }
 
-    FindByUserName(UName: string) {
-        return this.userRepository.findOne({ where: { UserName: UName } })
+    FindEmail(Email: string) {
+        return this.userRepository.findOne({ where: { Email: Email } })
     }
 }

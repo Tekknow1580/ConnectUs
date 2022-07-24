@@ -6,14 +6,16 @@ import Container from 'typedi';
 export class Authmiddelware implements ExpressMiddlewareInterface {
   // interface implementation is optional
 
-    constructor(private tokenService: TokenService){
-        this.tokenService = Container.get(TokenService);
-    }
+  constructor(private tokenService: TokenService) {
+    this.tokenService = Container.get(TokenService);
+  }
 
   use(request: Request, response: any, next: (err?: any) => any): any {
-    var User = this.tokenService.Valadate(request.headers.authorization || "")
-    if(User == false)
-        throw new Error("Invalid Token");
+    var Auth = (request.headers.authorization || "").replace("Bearer ", "");
+    var User = this.tokenService.Valadate(Auth);
+    
+    if (User === false)
+      throw new Error("Invalid Token");
     next();
   }
 }
